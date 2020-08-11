@@ -12,6 +12,7 @@ void histogram(int *arr, int n, int red, int green);                            
 void delay(int number_of_seconds);
 void swap(int *xp, int *yp);
 
+int swap_times = 0;
 
 void insertionSort(int arr[], int n) 
 { 
@@ -67,7 +68,8 @@ void selectionSort(int arr[], int n)
         histogram(arr, n, i, min_idx);
         delay(1);
         // Swap the found minimum element with the first element 
-        swap(&arr[min_idx], &arr[i]); 
+        if (min_idx != i) 
+            swap(&arr[min_idx], &arr[i]); 
         printf("\n");
     } 
 } 
@@ -77,6 +79,7 @@ void swap(int *xp, int *yp)
     int temp = *xp; 
     *xp = *yp; 
     *yp = temp; 
+    ++swap_times;
 } 
 
 void delay(int number_of_seconds) 
@@ -96,9 +99,11 @@ void histogram(int *arr, int n, int red, int green){
 
     int w = (54-n)/2;               
 
-    for (int i = 0; i < w; i++)             // With that we print histogram mid of terminal.
+    for (int i = 0; i < w-5; i++)             // With that we print histogram mid of terminal.
         printf("\n");
     
+    printf("Swaps: %d\n\n\n\n", swap_times);
+
     for(int i = 0; i < n;i++)
     {
         printf("%3d |", arr[i]);            // Print number.
